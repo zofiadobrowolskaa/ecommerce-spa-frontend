@@ -1,0 +1,108 @@
+@use '../variables' as *;
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+  font-family: inherit;
+
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    color: $primary-color;
+    border-radius: 50%;
+    transition: all 0.2s ease-in-out;
+
+    &:hover:not(:disabled) {
+      border-color: $accent-color;
+      color: $accent-color;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $accent-color;
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+      border-color: transparent;
+      background: transparent;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  .pagination-number.active {
+    background-color: $accent-color;
+    color: #fff;
+    border-color: $accent-color;
+    font-weight: 600;
+    
+    &:hover {
+      background-color: darken($accent-color, 5%);
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .pagination-arrow {
+    font-size: 20px;
+    font-weight: 300;
+    border: none;
+    background: transparent;
+
+    &:hover:not(:disabled) {
+      background: transparent;
+      color: $accent-color;
+      transform: scale(1.2);
+      box-shadow: none;
+      border: none;
+    }
+  }
+
+  .pagination-numbers {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pagination-dots {
+    color: #999;
+    padding: 0 0.25rem;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .pagination-container {
+      gap: 0.25rem;
+    }
+
+    button {
+      width: 34px;
+      height: 34px;
+      font-size: 13px;
+    }
+    
+    .pagination-arrow {
+      font-size: 18px;
+    }
+  }
+}
