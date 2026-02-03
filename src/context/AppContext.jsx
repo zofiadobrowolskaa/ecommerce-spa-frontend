@@ -1,6 +1,7 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useMemo, useState, useEffect, useCallback } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
-import initialProducts from '../data/products.json'; 
+import initialProducts from '../data/products.json';
+import { authService } from '../auth/authService';
 
 export const AppContext = createContext();
 
@@ -17,10 +18,22 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const addToCart = useCallback((productId, variantId, quantity = 1, size = null) => {
+    setCart(prev => {
+      const idx = prev.findIndex(item => item.productId === productId && item.variantId === variantId && item.size === size);
+      if (idx > -1) {
+        const copy = [...prev];
+        copy[idx].quantity += quantity;
+        return copy;
+      }
+      return [...prev, { productId, variantId, quantity, size }];
+    });
+  }, [setCart]);
+
 
   const contextValue = {
     products, setProducts,
-    cart, setCart,
+    cart, setCart, addToCart,
     userRole, setUserRole, loginAs, isAdmin
   };
 
