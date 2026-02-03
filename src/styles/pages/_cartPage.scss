@@ -1,0 +1,198 @@
+@use '../variables' as *;
+
+.cart-page {
+    padding: $spacing-unit;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 30vh; 
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: $spacing-unit * 2;
+        text-align: center;
+    }
+
+    &.empty-cart {
+        text-align: center;
+        padding: $spacing-unit * 5 0; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+            margin-bottom: $spacing-unit;
+            color: #666;
+        }
+
+        .go-to-catalog {
+            display: inline-block;
+            margin-top: $spacing-unit * 2;
+            color: $accent-color;
+            font-size: 1.2rem;
+            font-weight: bold;
+            
+            &:hover {
+                color: $primary-color;
+                transform: translateY(-2px);
+            }
+        }
+    }   
+
+    .cart-content-wrapper {
+        display: flex;
+        gap: $spacing-unit * 3;
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+        }
+    }
+
+    .cart-items {
+        flex: 2;
+    }
+
+    .cart-item {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        padding: $spacing-unit * 1.5 0;
+        gap: $spacing-unit;
+        align-items: center;
+
+        .item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            h3 {
+                font-size: 1.1rem;
+                font-weight: 500;
+                margin-bottom: 0.2rem;
+            }
+            p {
+                font-size: 0.9rem;
+                color: #666;
+            }
+        }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 0.5rem;
+            
+            label { font-size: 0.9rem; }
+
+            .quantity-input {
+                width: 50px;
+                padding: 0.3rem;
+                border: 1px solid #ccc;
+                text-align: center;
+            }
+
+            .btn-remove {
+                background: none;
+                color: #888;
+                border: none;
+                padding: 0;
+                font-size: 0.9rem;
+                text-decoration: underline;
+
+                &:hover {
+                    color: $primary-color;
+                    background: none;
+                }
+            }
+        }
+        
+        .item-subtotal {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    }
+
+    .cart-summary {
+        flex: 1;
+        background: $light-bg;
+        padding: $spacing-unit * 2;
+        border: 1px solid #eee;
+        height: fit-content;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: $spacing-unit * 1.5;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            
+            &.total-line {
+                border-top: 1px solid #ccc;
+                padding-top: 0.5rem;
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-top: 1rem;
+            }
+        }
+
+        .btn-checkout {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: $spacing-unit * 1.5;
+            padding: 0.7rem;
+            background: $accent-color;
+            color: $light-bg;
+        }
+    }
+    .promo-section {
+        margin: $spacing-unit * 1.5 0;
+        padding: $spacing-unit;
+        background: #f9f9f9;
+        border-radius: 20px;
+        input {
+                flex-grow: 1;
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-bottom-left-radius: 10px;
+                border-top-left-radius: 10px;
+        }
+        button {
+                padding: 0.5rem 1rem;
+                background: $primary-color;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-bottom-right-radius: 10px;
+                border-top-right-radius: 10px;
+
+                &:disabled {
+                    background: #ccc;
+                }
+            }
+        
+        .promo-error {
+            color: #d9534f;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .promo-success {
+            color: #5cb85c;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin: 0;
+        }
+    }
+
+    .discount-line {
+        color: #5cb85c;
+        font-weight: bold;
+    }
+}
