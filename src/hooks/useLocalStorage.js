@@ -1,29 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-// custom hook to persist state in local storage
+/*
+  custom hook for persistent state.
+  stores data in localStorage.
+ */
 
-export const useLocalStorage = (key, initialValue) => {
-  // get value from local storage or use initial value
-  const [storedValue, setStoredValue] = useState(() => {
+function useLocalStorage(key, initialValue) {
+
+// lazy state init - runs only on first render.
+  const [value, setValue] = useState(() => {
     try {
-      const item = window.localStorage.getItem(key)
-      return item ? JSON.parse(item) : initialValue
-    } catch (error) {
-      console.error(error)
-      return initialValue
-    }
-  })
+      // read value from localStorage
+      const item = window.localStorage.getItem(key);
 
-  // update local storage when state changes
-  const setValue = (value) => {
+      // parse stored json or use default
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
+
+  //  sync state changes to localStorage
+  useEffect(() => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value
-      setStoredValue(valueToStore)
-      window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      // save updated value as json
+      window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  }, [key, value]);
 
-  return [storedValue, setValue]
+  return [value, setValue];
 }
+
+export default useLocalStorage;
