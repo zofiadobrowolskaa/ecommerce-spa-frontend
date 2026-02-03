@@ -1,0 +1,159 @@
+@use '../variables' as *;
+
+.product-details-page {
+  padding: $spacing-unit * 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  .product-main-info {
+    display: flex;
+    gap: $spacing-unit * 3;
+    margin-bottom: $spacing-unit * 2;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      padding: $spacing-unit * 2;
+    }
+  }
+
+  .product-image-gallery {
+    flex: 1;
+    
+    .main-image {
+      width: 100%;
+      height: auto;
+      max-height: 580px;
+      object-fit: cover;
+      border: 1px solid #eee;
+
+      @media (max-width: 900px) {
+        max-height: 400px;
+        width: 70%;
+        margin: 0 auto;
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        width: 100%;
+        max-height: 400px;
+      }
+    }
+  }
+
+  .product-details-content {
+    flex: 1;
+    padding-top: $spacing-unit;
+    
+    @media (max-width: 900px) {
+      padding-top: 0;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: $spacing-unit;
+    }
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: $accent-color;
+      margin-bottom: $spacing-unit * 2;
+    }
+
+    .description {
+      margin-bottom: $spacing-unit * 2;
+      line-height: 1.8;
+    }
+  }
+
+  .options-group {
+    margin-bottom: $spacing-unit * 2;
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.8rem;
+    }
+
+    .variant-selector button {
+      background: $light-bg;
+      color: $primary-color;
+      border: 1px solid $primary-color;
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      transition: all 0.2s ease;
+      
+      &.active {
+        background: $primary-color;
+        color: $light-bg;
+        border-color: $primary-color;
+      }
+    }
+
+    select {
+        padding: 0.5rem;
+        border: 1px solid $primary-color;
+    }
+  }
+
+  .quantity-and-cart {
+    display: flex;
+    gap: $spacing-unit;
+    margin-top: $spacing-unit * 3;
+    
+    .quantity-input {
+      width: 80px;
+      padding: 0.7rem;
+      border: 1px solid $primary-color;
+      text-align: center;
+    }
+    
+    .add-to-cart-btn {
+      flex-grow: 1;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .product-materials {
+    margin-top: $spacing-unit * 5;
+    border-top: 1px solid #ccc;
+    padding-top: $spacing-unit * 2;
+    
+    h2 {
+      font-weight: 300;
+      margin-bottom: $spacing-unit;
+    }
+    p {
+        line-height: 1.5;
+    }
+  }
+}
+
+.related-products-section {
+  margin-top: $spacing-unit * 5;
+  
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: $spacing-unit * 3;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-unit * 2;
+
+    @media (max-width: 900px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-unit;
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+  }
+}
