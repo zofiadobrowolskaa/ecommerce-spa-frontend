@@ -1,58 +1,62 @@
-import { useMemo, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 /*
-  custom pagination hook synced with URL.
-  paramName: allows multiple paginations in one app
+  custom pagination hook synced with URL
+  paramName: allows multiple independent paginations in one app
 */
 
 const usePagination = (items, itemsPerPage = 10, options = {}) => {
-  const { 
-    paramName = 'page', 
-    scrollToTop = true 
-  } = options;
+  const { paramName = 'page', scrollToTop = true } = options;
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // get current page from URL (single source of truth)
-  const currentPage = useMemo(() => {
-    const pageParam = searchParams.get(paramName);
-    const page = parseInt(pageParam, 10);
-    // fallback to 1 if invalid or less than 1
-    return (isNaN(page) || page < 1) ? 1 : page;
-  }, [searchParams, paramName]);
+  // state for current page to trigger re-renders when page changes
+  const [currentPage, setCurrentPage] = useState(() => {
+    const page = parseInt(searchParams.get(paramName), 10);
+    return isNaN(page) || page < 1 ? 1 : page;
+  });
 
+  // keep currentPage in sync with URL changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage]);
+    const page = parseInt(searchParams.get(paramName), 10);
+    const validPage = isNaN(page) || page < 1 ? 1 : page;
+    if (validPage !== currentPage) {
+      setCurrentPage(validPage);
+    }
+  }, [searchParams, paramName, currentPage]);
 
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  // self-healing: adjust page if it exceeds total pages after filtering
+  // self-healing: reset to page 1 if currentPage exceeds totalPages after filtering
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
       setSearchParams(prev => {
-        prev.set(paramName, '1');
+        prev.set(paramName, totalPages.toString());
         return prev;
-      }, { replace: true }); // replace history entry
+      }, { replace: true });
     }
-  }, [items.length, totalPages, currentPage, paramName, setSearchParams]);
+  }, [currentPage, totalPages, paramName, setSearchParams]);
 
-  // function to navigate to specific page (updates URL)
+  // navigate to a specific page (updates state and URL)
   const goToPage = (pageNumber) => {
-    const targetPage = Math.max(1, Math.min(pageNumber, Math.max(1, totalPages)));
+    const targetPage = Math.max(1, Math.min(pageNumber, totalPages || 1));
 
+    // update state first to trigger re-render
+    setCurrentPage(targetPage);
+
+    // update URL parameter
     setSearchParams(prev => {
       prev.set(paramName, targetPage.toString());
       return prev;
     });
 
-    if (scrollToTop) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // optional smooth scroll to top
+    if (scrollToTop) window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // slice data for current page
+  // slice items for the current page
   const paginatedItems = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     return items.slice(startIndex, startIndex + itemsPerPage);
