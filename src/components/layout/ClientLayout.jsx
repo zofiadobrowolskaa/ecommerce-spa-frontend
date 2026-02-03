@@ -1,0 +1,59 @@
+import React from 'react';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
+// import CartIcon from '../CartIcon';
+import '../../styles/pages/_layout.scss';
+
+// import HomePage from '../../pages/HomePage';
+// import ProductListPage from '../../pages/ProductListPage';
+// import ProductDetailsPage from '../../pages/ProductDetailsPage';
+// import CartPage from '../../pages/CartPage';
+// import CheckoutPage from '../../pages/CheckoutPage';
+// import OrderConfirmationPage from '../../pages/OrderConfirmationPage';
+// import AccountPage from '../../pages/AccountPage';
+
+const ClientLayout = () => {
+  return (
+    <div className="client-app-wrapper">
+      <header className="client-header">
+        <nav className="main-nav">
+        {/* client panel navigation */}
+          <div>
+            <Link to="/" className="nav-headers">Home</Link>
+            <Link to="/products" className="nav-headers">Shop</Link>
+          </div>
+
+          <div>
+            <Link to="/" className="title">AURA</Link>
+          </div>
+
+          <div className="nav-right">
+            <Link to="/account" className="nav-headers">Account</Link>
+            {/* <CartIcon /> */}
+          </div>
+        </nav>
+      </header>
+
+      <main className="client-main">
+        {/* client-side routing configuration */}
+        {/*
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductListPage />} />
+          <Route path="/products/:id/:variantId" element={<ProductDetailsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-confirmation/:id" element={<OrderConfirmationPage />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        */}
+      </main>
+
+      <footer className="client-footer">
+        © {new Date().getFullYear()} Aura. All rights reserved.
+      </footer>
+    </div>
+  );
+};
+
+export default ClientLayout;

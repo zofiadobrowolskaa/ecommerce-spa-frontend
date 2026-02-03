@@ -10,14 +10,18 @@ export const AppProvider = ({ children }) => {
   const [cart, setCart] = useLocalStorage('cart', []);
   const [userRole, setUserRole] = useLocalStorage('userRole', 'client'); 
 
+  const isAdmin = userRole === 'admin';
+  const loginAs = (role) => {
+    if (role === 'admin' || role === 'client') {
+        setUserRole(role);
+    }
+  };
+
 
   const contextValue = {
-    products, 
-    setProducts,
-    cart, 
-    setCart,
-    userRole, 
-    setUserRole,
+    products, setProducts,
+    cart, setCart,
+    userRole, setUserRole, loginAs, isAdmin
   };
 
   return (
