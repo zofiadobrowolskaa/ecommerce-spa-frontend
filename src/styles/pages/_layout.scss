@@ -1,0 +1,102 @@
+@use '../variables' as *;
+
+
+.client-header, .admin-header {
+  background: $light-bg;
+  border-bottom: 1px solid #eee;
+  padding: 1.5rem 0;
+  
+  .main-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 $spacing-unit * 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    a {
+      margin-right: $spacing-unit * 1.5;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      
+      &:last-child {
+          margin-right: 0;
+      }
+
+    }
+
+    .nav-headers {
+      display: inline-block;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+    
+    .nav-right {
+        display: flex;
+        gap: $spacing-unit;
+    }
+
+    .title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: $primary-color;
+        font-family: 'Alte Haas Grotesk', sans-serif;
+    }
+
+    .title:hover {
+        color: #333;
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+        flex-wrap: wrap;
+        gap: $spacing-unit;
+        a { margin-right: $spacing-unit; }
+    }
+  }
+}
+
+
+.client-footer, .admin-footer {
+  text-align: center;
+  padding: $spacing-unit * 3 0;
+  background: #f0f0f0;
+  color: #666;
+  font-size: 0.85rem;
+  border-top: 1px solid #eee;
+  margin-top: $spacing-unit * 4;
+}
+
+.role-switcher-container {
+  background: #333;
+  color: #fff;
+  padding: 0.5rem $spacing-unit;
+  text-align: center;
+  font-size: 0.9rem;
+
+  .current-role {
+      font-weight: bold;
+      color: $accent-color;
+  }
+
+  button {
+    background: transparent; 
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0.3rem 0.8rem;
+    margin-left: 1rem;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    
+    &:hover {
+      background: $accent-color;
+      border-color: $accent-color;
+      transform: translateY(-1px);
+    }
+  }
+}

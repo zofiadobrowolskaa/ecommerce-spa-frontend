@@ -9,3 +9,42 @@ body {
   margin: 0 auto;
   padding: 0;
 }
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+button .btn-primary {
+  cursor: pointer;
+  background: $primary-color;
+  color: $light-bg;
+  border: 1px solid $primary-color;
+  padding: 0.7rem 1.5rem;
+  transition: all 0.3s ease;
+  &:hover {
+    background: $accent-color;
+    border-color: $accent-color;
+    
+  }
+}
+
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.error-message {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+html {
+  overflow-y: scroll;
+}
