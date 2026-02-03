@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
-// import CartIcon from '../CartIcon';
+import CartIcon from '../CartIcon';
 import '../../styles/pages/_layout.scss';
 // import HomePage from '../../pages/HomePage';
 import ProductListPage from '../../pages/ProductListPage';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
-// import CartPage from '../../pages/CartPage';
+import CartPage from '../../pages/CartPage';
 // import CheckoutPage from '../../pages/CheckoutPage';
 // import OrderConfirmationPage from '../../pages/OrderConfirmationPage';
 // import AccountPage from '../../pages/AccountPage';
@@ -27,7 +27,7 @@ const ClientLayout = () => {
 
           <div className="nav-right">
             <Link to="/account" className="nav-headers">Account</Link>
-            {/* <CartIcon /> */}
+            <CartIcon />
           </div>
         </nav>
       </header>
@@ -37,11 +37,11 @@ const ClientLayout = () => {
         <Routes>
             <Route path="/products" element={<ProductListPage />} />
              <Route path="/products/:id/:variantId" element={<ProductDetailsPage />} />
+             <Route path="/cart" element={<CartPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         {/*
           <Route path="/" element={<HomePage />} />
-          <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order-confirmation/:id" element={<OrderConfirmationPage />} />
           <Route path="/account" element={<AccountPage />} />
