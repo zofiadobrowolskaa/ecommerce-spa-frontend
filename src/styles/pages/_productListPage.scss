@@ -1,0 +1,222 @@
+@use '../variables' as *;
+
+.product-list-page {
+  padding: 0rem 2rem;
+  
+  .page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
+
+  .content-wrapper {
+    display: flex;
+    gap: $spacing-unit * 2;
+    
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
+  }
+
+  .product-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $spacing-unit * 2;
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-unit;
+    }
+  }
+
+  .products-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: $spacing-unit * 5;
+    font-style: italic;
+    grid-column: 1 / -1;
+  }
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: $light-bg;
+  border: 1px solid #eee;
+  padding-bottom: $spacing-unit * 2;
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-image-container {
+    height: 280px;
+    overflow: hidden;
+    @media (max-width: 600px) {
+        height: 200px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  .card-info {
+    text-align: center;
+    padding: 0 $spacing-unit;
+    
+    .name {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.1rem;
+    }
+
+    .price {
+      font-weight: bold;
+      color: $accent-color;
+    }
+  }
+  .variant-swatches {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+
+        .swatch {
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: #ccc;
+          
+
+            &:hover, &.active {
+                box-shadow: 0 0 0 1px rgb(157, 156, 156);
+            }
+        }
+    }
+}
+
+.filter-sidebar {
+  min-width: 250px;
+  padding: $spacing-unit;
+  background: $light-bg;
+  border: 1px solid #eee;
+  height: fit-content;
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: $spacing-unit * 1.5;
+    text-align: center;
+  }
+
+  .filter-group {
+    margin-bottom: $spacing-unit * 1.5;
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      font-family: inherit;
+      border-radius: 20px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      .category-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        font-weight: normal;
+        margin-bottom: 0;
+
+        input[type="checkbox"] {
+          cursor: pointer;
+          width: 18px;
+          height: 18px;
+          accent-color: #c9b39f;
+        }
+
+        span {
+          font-size: 0.95rem;
+        }
+
+        &:hover {
+          color: #c9b39f;
+        }
+      }
+    }
+
+    .clear-categories-btn {
+      width: 100%;
+      padding: 0.6rem;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #e0e0e0;
+        border-color: #c9b39f;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    min-width: unset;
+    display: grid;
+    grid-template-columns: repeat(1fr);
+    gap: $spacing-unit;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .filter-group {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
