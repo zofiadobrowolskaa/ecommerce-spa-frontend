@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
-// import CartIcon from '../CartIcon';
+import CartIcon from '../CartIcon';
 import '../../styles/pages/_layout.scss';
 // import HomePage from '../../pages/HomePage';
 import ProductListPage from '../../pages/ProductListPage';
@@ -27,7 +27,7 @@ const ClientLayout = () => {
 
           <div className="nav-right">
             <Link to="/account" className="nav-headers">Account</Link>
-            {/* <CartIcon /> */}
+            <CartIcon />
           </div>
         </nav>
       </header>
