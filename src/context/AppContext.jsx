@@ -21,6 +21,7 @@ export const AppProvider = ({ children }) => {
   const [cart, setCart] = useLocalStorage('cart', []);
   const [userRole, setUserRole] = useLocalStorage('userRole', 'client'); 
   const [discount, setDiscount] = useLocalStorage('discount', { code: '', percentage: 0 });
+  const [orders, setOrders] = useLocalStorage('orders', [])
 
   const isAdmin = userRole === 'admin';
   const loginAs = (role) => {
@@ -63,12 +64,29 @@ export const AppProvider = ({ children }) => {
   
   const resetDiscount = useCallback(() => setDiscount({ code: '', percentage: 0 }), [setDiscount]);
 
+  const placeOrder = useCallback((orderData) => {
+    const newOrder = {
+      id: `ORD-${Date.now()}`,
+      date: new Date().toISOString(),
+      items: cart,
+      total: cartTotal - discountValue,
+      details: orderData,
+      status: 'Completed',
+    };
+    setOrders(prev => [newOrder, ...prev]);
+    setCart([]);
+    resetDiscount();
+    return newOrder.id;
+  }, [cart, cartTotal, discountValue, setOrders, setCart, resetDiscount]);
+
+  const removeOrder = useCallback((id) => setOrders(prev => prev.filter(o => o.id !== id)), [setOrders]);
 
   const contextValue = {
     products, setProducts,
     cart, addToCart, removeFromCart, updateQuantity, cartTotal,
-    discount, applyDiscount, resetDiscount, discountValue, cartTotalAfterDiscount: cartTotal - discountValue,
-    userRole, setUserRole, loginAs, isAdmin
+    discount, applyDiscount, discountValue, cartTotalAfterDiscount: cartTotal - discountValue,
+    userRole, loginAs, isAdmin,
+    orders, placeOrder, removeOrder,
   };
 
   return (
