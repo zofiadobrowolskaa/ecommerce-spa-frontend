@@ -6,8 +6,8 @@ import '../../styles/pages/_layout.scss';
 import ProductListPage from '../../pages/ProductListPage';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
 import CartPage from '../../pages/CartPage';
-// import CheckoutPage from '../../pages/CheckoutPage';
-// import OrderConfirmationPage from '../../pages/OrderConfirmationPage';
+import CheckoutPage from '../../pages/CheckoutPage';
+import OrderConfirmationPage from '../../pages/OrderConfirmationPage';
 // import AccountPage from '../../pages/AccountPage';
 
 const ClientLayout = () => {
@@ -38,12 +38,12 @@ const ClientLayout = () => {
             <Route path="/products" element={<ProductListPage />} />
              <Route path="/products/:id/:variantId" element={<ProductDetailsPage />} />
              <Route path="/cart" element={<CartPage />} />
+             <Route path="/checkout" element={<CheckoutPage />} />
+             <Route path="/order-confirmation/:id" element={<OrderConfirmationPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         {/*
           <Route path="/" element={<HomePage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/order-confirmation/:id" element={<OrderConfirmationPage />} />
           <Route path="/account" element={<AccountPage />} />
         */}
       </main>

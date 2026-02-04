@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAppContext } from './context/AppContext';
-import { Toaster } from 'react-hot-toast';
 import ClientLayout from './components/layout/ClientLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import RoleSwitcher from './components/RoleSwitcher';
+import ConfirmDialog from './components/ConfirmDialog';
+import { Toaster } from 'react-hot-toast';
 import './styles/global.scss';
 
 // app decides only about layout selection
@@ -14,8 +15,9 @@ function App() {
   return (
     <div className="app-container">
       <Toaster position="top-center" />
-      <RoleSwitcher />
-
+      <ConfirmDialog />
+      <RoleSwitcher /> 
+      
       {isAdmin ? <AdminLayout /> : <ClientLayout />}
     </div>
   );
