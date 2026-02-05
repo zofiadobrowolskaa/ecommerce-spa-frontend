@@ -87,7 +87,7 @@ const ProductDetailsPage = () => {
 
     const sizeInfo = selectedSize ? ` size: ${selectedSize}` : '';
     const variantInfo = currentVariant?.color ? ` (${currentVariant.color})` : '';
-    toast.success(`added ${qtyNumber}x ${product.name}${variantInfo}${sizeInfo} to cart!`);
+    toast.success(`Added ${qtyNumber}x ${product.name}${variantInfo}${sizeInfo} to cart!`);
   };
 
   return (
@@ -166,7 +166,7 @@ const ProductDetailsPage = () => {
 
       {product.aboutMaterials && (
         <section className="product-materials">
-          <h2>about the materials</h2>
+          <h2>About the materials</h2>
           {Object.entries(product.aboutMaterials).map(([materialName, description]) => (
             <div key={materialName} className="material-item">
               <p><strong>{materialName}:</strong> {description}</p>

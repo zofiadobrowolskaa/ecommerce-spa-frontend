@@ -43,6 +43,14 @@
             margin-bottom: $spacing-unit;
             border: 1px solid #ccc;
         }
+
+        .error-message {
+           color: #e74c3c;
+           font-size: 0.85rem;
+           margin-top: -10px;
+           margin-bottom: 10px;
+           padding-left: 5px;
+        }
         
         .button-group {
             display: flex;

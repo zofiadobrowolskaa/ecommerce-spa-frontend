@@ -39,6 +39,12 @@ const usePagination = (items, itemsPerPage = 10, options = {}) => {
     }
   }, [currentPage, totalPages, paramName, setSearchParams]);
 
+  useEffect(() => {
+    if (scrollToTop) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentPage, scrollToTop]);
+
   // navigate to a specific page (updates state and URL)
   const goToPage = (pageNumber) => {
     const targetPage = Math.max(1, Math.min(pageNumber, totalPages || 1));
@@ -51,9 +57,6 @@ const usePagination = (items, itemsPerPage = 10, options = {}) => {
       prev.set(paramName, targetPage.toString());
       return prev;
     });
-
-    // optional smooth scroll to top
-    if (scrollToTop) window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // slice items for the current page
