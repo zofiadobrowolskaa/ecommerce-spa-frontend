@@ -1,0 +1,227 @@
+@use '../variables' as *;
+
+.profile-page {
+    max-width: 900px;
+    margin: $spacing-unit * 3 auto;
+    padding: $spacing-unit * 2;
+    background: $light-bg;
+    border: 1px solid #eee;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: $spacing-unit * 3;
+        text-align: center;
+    }
+
+    section {
+        margin-bottom: $spacing-unit * 3;
+        padding-bottom: $spacing-unit * 2;
+        border-bottom: 1px solid #f0f0f0;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: $spacing-unit;
+        }
+    }
+
+    .profile-details form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.6rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ccc;
+            
+            &:disabled {
+                background: #f7f7f7;
+                color: #555;
+            }
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: $spacing-unit;
+            margin-top: $spacing-unit;
+            .btn-edit, .btn-save, .btn-cancel {
+                cursor: pointer;
+                background: $primary-color;
+                color: $light-bg;
+                border: none;
+                padding: 0.7rem 0.7rem;
+                transition: all 0.3s ease;
+                &:hover {
+                    background: $accent-color;
+                    border-color: $accent-color;
+                }
+            }
+
+            .btn-save {
+                background: rgb(36, 131, 36);
+                &:hover { background: rgb(28, 99, 28); }
+            }
+                            
+            .btn-cancel { 
+                background: #c13434;
+                &:hover { background: #b02a2a; }
+            }
+        }
+    }
+}
+
+
+.order-history {
+  margin-top: $spacing-unit * 3;
+
+  .orders-list {
+    border: 1px solid #eee;
+    background: $light-bg;
+  }
+
+  .order-item {
+    display: flex;
+    align-items: center;
+    padding: $spacing-unit;
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s ease;
+
+    &.header {
+      background: #f8f8f8 !important;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: #888;
+      cursor: default;
+      pointer-events: none;
+      border-bottom: 2px solid #eee;
+    }
+
+    &:nth-child(even):not(.header) {
+      background: #fcfcfc;
+    }
+
+
+    .order-id { flex: 0.7; min-width: 80px; font-size: 0.9rem; color: #666; }
+    .customer-email { 
+        flex: 2; 
+        min-width: 150px; 
+        font-size: 0.9rem; 
+        color: #666;
+        overflow: hidden; 
+    }
+    .order-date { flex: 1.2; min-width: 100px; font-size: 0.9rem; color: #666; }
+    .order-total { flex: 0.8; min-width: 80px; font-weight: bold; }
+    .order-status { flex: 1; min-width: 100px; text-align: center; }
+    .order-actions { flex: 0.7; min-width: 80px; text-align: right; }
+
+    &.user-view {
+        .order-id { flex: 1; }
+        .order-date { flex: 2; }
+    }
+
+    .order-status {
+      display: inline-block;
+      font-size: 0.8rem;
+      width: fit-content;
+      margin: 0 auto;
+      font-weight: bold;
+      &.status-completed { color: #27ae60; }
+      &.status-pending { color: #f39c12; }
+    }
+
+    .btn-remove-order {
+      background: none;
+      color: #c0392b;
+      border: none;
+      padding: 0;
+      font-size: 0.8rem;
+      text-decoration: underline;
+      cursor: pointer;
+      &:hover { color: #a62d27; }
+    }
+
+    &:hover:not(.header) {
+      transform: translateY(-1px);
+      background-color: #f9f7f7;
+    }
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+      align-items: stretch;
+      padding: $spacing-unit * 1.5;
+      gap: 0.5rem;
+
+      &.header {
+        display: none !important;
+      }
+
+      .order-id, .customer-email, .order-date, .order-total, .order-status, .order-actions {
+        flex: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.2rem 0;
+        border-bottom: 1px solid #f1f1f1;
+
+        &::before {
+          content: attr(data-label) ": ";
+          font-weight: bold;
+          color: #999;
+          text-transform: uppercase;
+          font-size: 0.7rem;
+          margin-right: 10px;
+          text-align: left;
+        }
+      }
+
+      .order-status {
+        justify-content: space-between;
+        &::before { margin-right: auto; }
+      }
+
+      .order-actions {
+        border-bottom: none;
+        justify-content: center;
+        margin-top: 0.5rem;
+        &::before { display: none; }
+      }
+    }
+  }
+}
+
+.account-actions {
+    display: flex;
+    justify-content: center;
+
+    .logout-btn-large {
+      background: white;
+      border: 2px solid crimson;
+      color: crimson;
+      padding: 0.8rem 3rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background: crimson;
+        color: white;
+        border-color: crimson;
+      }
+    }}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
