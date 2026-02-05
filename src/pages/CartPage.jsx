@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
+import { confirmDialog } from '../components/ConfirmDialog'; // Dodano import
 import '../styles/pages/_cartPage.scss';
 
 /*
@@ -35,11 +36,19 @@ const CartPage = () => {
     }
   };
 
-  // remove a cart item by productId, variantId, and size, show feedback toast
-  const handleRemove = (item) => {
-    removeFromCart(item.productId, item.variantId, item.itemSize);
+  // remove a cart item by productId, variantId, and size
+  const handleRemove = async (item) => {
     const sizeText = item.itemSize ? ` (Size: ${item.itemSize})` : '';
-    toast.success(`${item.productName}${sizeText} removed from cart.`);
+    
+    const confirmed = await confirmDialog.show(
+      'Remove from Cart',
+      `Are you sure you want to remove "${item.productName}"${sizeText} from your cart?`
+    );
+
+    if (confirmed) {
+      removeFromCart(item.productId, item.variantId, item.itemSize);
+      toast.success(`${item.productName}${sizeText} removed from cart.`);
+    }
   };
 
   // determine if discount is applied and calculate final total
@@ -136,13 +145,13 @@ const CartPage = () => {
           >
             <input 
               type="text" 
-              placeholder="promo code" 
+              placeholder="Promo code" 
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
               disabled={isDiscountApplied}
             />
             <button type="submit" disabled={isDiscountApplied}>
-              apply
+              Apply
             </button>
             {isDiscountApplied && (<p className="promo-success">Discount applied! (-20%)</p>)}
           </form>

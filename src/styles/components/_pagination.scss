@@ -28,8 +28,6 @@
     transition: all 0.2s ease-in-out;
 
     &:hover:not(:disabled) {
-      border-color: $accent-color;
-      color: $accent-color;
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
@@ -56,9 +54,8 @@
     font-weight: 600;
     
     &:hover {
-      background-color: darken($accent-color, 5%);
-      transform: none;
-      box-shadow: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     }
   }
 
