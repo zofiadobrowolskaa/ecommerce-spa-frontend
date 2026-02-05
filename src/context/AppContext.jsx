@@ -175,6 +175,19 @@ export const AppProvider = ({ children }) => {
     }
   }, [user]);
 
+  const addProduct = useCallback((newProduct) => setProducts(prev => [newProduct, ...prev]), [setProducts]);
+  const updateProduct = useCallback((updatedProduct) => setProducts(prev => prev.map(p => p.id === updatedProduct.id ? updatedProduct : p)), [setProducts]);
+  const deleteProduct = useCallback((id) => setProducts(prev => prev.filter(p => p.id !== id)), [setProducts]);
+
+  const resetAppData = useCallback(() => {
+    localStorage.removeItem('products');
+    localStorage.removeItem('orders');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('discount');
+
+    window.location.reload();
+  }, []);
+
   const contextValue = {
     products, setProducts,
     cart, addToCart, removeFromCart, updateQuantity, cartTotal,
@@ -183,6 +196,8 @@ export const AppProvider = ({ children }) => {
     orders, placeOrder, removeOrder,
     login, logout, register, user,
     profile, updateProfile,
+    addProduct, updateProduct, deleteProduct,
+    resetAppData,
   };
 
   return (
