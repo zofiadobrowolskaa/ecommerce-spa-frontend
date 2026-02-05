@@ -149,6 +149,10 @@
             padding: 0.7rem;
             background: $accent-color;
             color: $light-bg;
+
+            &:hover {
+                transform: scale(1.01);
+            }
         }
     }
     .promo-section {
