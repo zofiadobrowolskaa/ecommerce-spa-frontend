@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
-// import DashboardPage from '../../pages/DashboardPage';
+import DashboardPage from '../../pages/DashboardPage';
 // import ProductManagementPage from '../../pages/ProductManagementPage';
 import '../../styles/pages/_layout.scss';
 
@@ -20,12 +20,14 @@ const AdminLayout = () => {
 
       <main className="admin-main">
         {/* admin routing configuration */}
-        {/*
         <Routes>
           <Route path="/admin/dashboard" element={<DashboardPage />} />
-          <Route path="/admin/products" element={<ProductManagementPage />} />
           <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+        </Routes>
+        {/*
+        <Routes>
+          <Route path="/admin/products" element={<ProductManagementPage />} />
         </Routes>
         */}
       </main>
