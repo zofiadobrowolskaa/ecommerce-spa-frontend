@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import CartIcon from '../CartIcon';
 import '../../styles/pages/_layout.scss';
-// import HomePage from '../../pages/HomePage';
+import HomePage from '../../pages/HomePage';
 import ProductListPage from '../../pages/ProductListPage';
 import ProductDetailsPage from '../../pages/ProductDetailsPage';
 import CartPage from '../../pages/CartPage';
@@ -41,11 +41,9 @@ const ClientLayout = () => {
              <Route path="/checkout" element={<CheckoutPage />} />
              <Route path="/order-confirmation/:id" element={<OrderConfirmationPage />} />
              <Route path="/account" element={<AccountPage />} />
+             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        {/*
-          <Route path="/" element={<HomePage />} />
-        */}
       </main>
 
       <footer className="client-footer">

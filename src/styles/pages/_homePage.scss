@@ -1,0 +1,179 @@
+@use '../variables' as *; 
+
+.home-page {
+    .hero-section {
+        height: 80vh; 
+        min-height: 500px;
+        background-image: url('/img/front.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 3rem;
+        color: $light-bg;
+
+        
+        @media (max-width: 1024px) {
+            background-position: left center; 
+        }
+
+        .hero-content {
+            h1 {
+                font-size: 3rem;
+                font-family: 'Alte Haas Grotesk', sans-serif;
+                margin-bottom: $spacing-unit;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+
+                @media (max-width: 768px) {
+                    font-size: 3rem;
+                }
+            }
+
+            .hero-tagline {
+                font-size: 1.5rem;
+                margin-bottom: $spacing-unit * 2;
+                font-style: italic;
+                font-weight: 600;
+            }
+
+            .btn-shop-now {
+                background-color: $primary-color;
+                color: $light-bg;
+                border-radius: 20px;
+                padding: 0.5rem 1.5rem;
+                font-size: 1.1rem;
+                display: inline-block;
+                transition: transform 0.3s ease, background-color 0.3s;
+                
+                &:hover {
+                    transform: scale(1.05);
+                    background-color: #1a1a1a;
+                }
+            }
+        }
+    }
+
+    .promo-strip {
+        margin-top: 4rem;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $primary-color;
+        color: $light-bg;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        font-weight: 500;
+
+        .discount-code {
+            cursor: pointer;
+            margin-left: 0.5rem;
+            padding: 0.2rem 0.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-family: monospace;
+            display: inline-block;
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    .shop-by-category {
+        padding: 1rem 2rem;
+        text-align: center;
+        text-transform: uppercase;
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: $spacing-unit * 3;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: $spacing-unit;
+            
+            @media (max-width: 1024px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @media (max-width: 600px) {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-card {
+                position: relative;
+                height: 350px;
+                background-size: cover;
+                background-position: center center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                overflow: hidden;
+                
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 0; left: 0; right: 0; bottom: 0;
+                    background-color: rgba(0, 0, 0, 0.4);
+                    transition: background-color 0.3s ease;
+                }
+
+                .category-label {
+                    color: $light-bg;
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    letter-spacing: 1.5px;
+                    z-index: 2;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover {
+                    &:before {
+                        background-color: rgba(0, 0, 0, 0.2);
+                    }
+                    .category-label {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+    
+    .handcrafted-statement {
+        min-height: 400px;
+        background-image: url('/img/handcrafted.jpg');
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: $spacing-unit * 3;
+        margin-top: 3rem;
+        
+        .statement-overlay {
+            color: #fff;
+            h2 {
+                font-family: 'Alte Haas Grotesk', sans-serif;
+                font-size: 2.5rem;
+                font-weight: 600;
+                margin-bottom: $spacing-unit;
+                text-transform: uppercase;
+            }
+            
+            p {
+                font-size: 1.1rem;
+                
+                line-height: 1.5;
+            }
+        }
+    }
+}
