@@ -15,6 +15,19 @@ const calculateCartTotal = (currentCart, products) => {
   }, 0);
 };
 
+const defaultProfile = {
+    name: '',
+    surname: '',
+    email: '',
+    phone: '',
+    address: '',
+    house_number: '',
+    flat_number: '',
+    postalCode: '',
+    city: '',
+    country: '',
+};
+
 export const AppProvider = ({ children }) => {
 
   const [products, setProducts] = useLocalStorage('products', initialProducts);
@@ -22,6 +35,30 @@ export const AppProvider = ({ children }) => {
   const [userRole, setUserRole] = useLocalStorage('userRole', 'client'); 
   const [discount, setDiscount] = useLocalStorage('discount', { code: '', percentage: 0 });
   const [orders, setOrders] = useLocalStorage('orders', [])
+  const [user, setUser] = useState(null);
+  const [profile, setProfileState] = useState(defaultProfile);
+
+  useEffect(() => {
+    const initAuth = () => {
+      const currentUser = authService.getCurrentUser();
+      if (currentUser) {
+        setUser(currentUser);
+        setProfileState({
+            name: currentUser.name || '',
+            surname: currentUser.surname || '',
+            email: currentUser.email || '',
+            phone: currentUser.phone || '',
+            address: currentUser.address || '',
+            house_number: currentUser.house_number || '',
+            flat_number: currentUser.flat_number || '',
+            postalCode: currentUser.postalCode || '',
+            city: currentUser.city || '',
+            country: currentUser.country || '',
+        });
+      }
+    };
+    initAuth();
+  }, []);
 
   const isAdmin = userRole === 'admin';
   const loginAs = (role) => {
@@ -81,12 +118,71 @@ export const AppProvider = ({ children }) => {
 
   const removeOrder = useCallback((id) => setOrders(prev => prev.filter(o => o.id !== id)), [setOrders]);
 
+  const login = useCallback(async (email, password) => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const userData = authService.login(email, password);
+      setUser(userData);
+      
+      setProfileState({
+          ...defaultProfile,
+          ...userData
+      });
+      
+      return { success: true };
+    } catch (error) {
+      return { success: false, message: error.message };
+    }
+  }, []);
+
+  const register = useCallback(async (email, password, name, surname) => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const userData = authService.register(email, password, name, surname);
+      setUser(userData);
+      
+      setProfileState({
+          ...defaultProfile,
+          name: userData.name,
+          surname: userData.surname,
+          email: userData.email
+      });
+      
+      return { success: true };
+    } catch (error) {
+      return { success: false, message: error.message };
+    }
+  }, []);
+
+  const logout = useCallback(() => {
+    authService.logout();
+    setUser(null);
+    setProfileState(defaultProfile);
+    setCart([]);
+    setDiscount({ code: '', percentage: 0 });
+  }, [setCart, setDiscount]);
+
+  const updateProfile = useCallback((updatedData) => {
+    try {
+        setProfileState(prev => ({ ...prev, ...updatedData }));
+        
+        if (user) {
+           const updatedUser = authService.updateUser(updatedData);
+           setUser(updatedUser);
+        }
+    } catch (error) {
+        console.error("Failed to update profile", error);
+    }
+  }, [user]);
+
   const contextValue = {
     products, setProducts,
     cart, addToCart, removeFromCart, updateQuantity, cartTotal,
     discount, applyDiscount, discountValue, cartTotalAfterDiscount: cartTotal - discountValue,
     userRole, loginAs, isAdmin,
     orders, placeOrder, removeOrder,
+    login, logout, register, user,
+    profile, updateProfile,
   };
 
   return (
