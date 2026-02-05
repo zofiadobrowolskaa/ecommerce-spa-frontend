@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { confirmDialog } from '../components/ConfirmDialog';
-import { usePagination } from '../hooks/usePagination';
+import usePagination from '../hooks/usePagination';
 import Pagination from '../components/Pagination';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
 import '../styles/pages/_adminDashboard.scss';
