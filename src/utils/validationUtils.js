@@ -28,6 +28,19 @@ export const luhnCheck = (cardNumber) => {
 };
 
 /*
+  professional email validation
+  returns true if valid, false otherwise.
+*/
+export const validateEmail = (email) => {
+  if (!email) return false;
+
+  // regex pattern for professional email validation
+  const emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+  
+  return emailRegex.test(email.trim());
+};
+
+/*
   helper to validate credit card expiration date in MM/YY format.
   returns true if the date is valid and in the future, false otherwise.
 */

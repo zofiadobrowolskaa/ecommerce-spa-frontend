@@ -7,6 +7,7 @@ import '../styles/pages/_profilePage.scss';
 import toast from 'react-hot-toast';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { validateEmail } from '../utils/validationUtils';
 
 const ProfileSchema = Yup.object().shape({
   name: Yup.string()
@@ -18,7 +19,7 @@ const ProfileSchema = Yup.object().shape({
     .matches(/^[a-zA-Z\s-]+$/, 'Surname can only contain letters'),
     
   email: Yup.string()
-    .email('Invalid email address'),
+    .test('valid-email', 'Please enter a valid email address (e.g. user@domain.com)', validateEmail),
     
   phone: Yup.string()
     .matches(/^\+?[0-9\s-]{9,15}$/, 'Phone number must contain only digits (9-15 chars)'),

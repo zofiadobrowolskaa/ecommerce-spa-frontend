@@ -16,19 +16,11 @@ const ClientLayout = () => {
       <header className="client-header">
         <nav className="main-nav">
         {/* client panel navigation */}
-          <div>
-            <Link to="/" className="nav-headers">Home</Link>
-            <Link to="/products" className="nav-headers">Shop</Link>
-          </div>
-
-          <div>
-            <Link to="/" className="title">AURA</Link>
-          </div>
-
-          <div className="nav-right">
-            <Link to="/account" className="nav-headers">Account</Link>
-            <CartIcon />
-          </div>
+          <Link to="/" className="nav-headers">Home</Link>
+          <Link to="/products" className="nav-headers">Shop</Link>
+          <Link to="/" className="title">AURA</Link>
+          <Link to="/account" className="nav-headers">Account</Link>
+          <CartIcon />
         </nav>
       </header>
 

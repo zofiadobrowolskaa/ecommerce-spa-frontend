@@ -42,7 +42,6 @@ const Step4Summary = ({ prevStep, formData, cartTotal, cartItems, shippingCost, 
         setPaymentStatus('error');
       }
     } catch (err) {
-      console.error("Error:", err);
       setPaymentStatus('error');
     }
   };

@@ -27,18 +27,14 @@
 
     }
 
-    .nav-headers {
+    .nav-headers, .cart-icon {
       display: inline-block;
 
       &:hover {
         transform: scale(1.02);
       }
     }
-    
-    .nav-right {
-        display: flex;
-        gap: $spacing-unit;
-    }
+
 
     .title {
         font-size: 1.3rem;
