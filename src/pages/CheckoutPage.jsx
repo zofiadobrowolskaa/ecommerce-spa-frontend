@@ -111,7 +111,6 @@ const CheckoutPage = () => {
                   cartTotal={totalWithShipping} 
                   shippingCost={shippingCost}
                   cartItems={cartItemsData} 
-                  submitOrder={submitOrder} 
                   discountValue={discountValue}
                />;
       default:
