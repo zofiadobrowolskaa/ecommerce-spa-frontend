@@ -171,7 +171,7 @@ export const AppProvider = ({ children }) => {
            setUser(updatedUser);
         }
     } catch (error) {
-        console.error("Failed to update profile", error);
+      // profile update failed
     }
   }, [user]);
 

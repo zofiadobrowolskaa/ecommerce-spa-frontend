@@ -16,7 +16,6 @@ function useLocalStorage(key, initialValue) {
       // parse stored json or use default
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.error(error);
       return initialValue;
     }
   });
@@ -27,7 +26,7 @@ function useLocalStorage(key, initialValue) {
       // save updated value as json
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error(error);
+      // fallback to initialValue if JSON parse fails
     }
   }, [key, value]);
 

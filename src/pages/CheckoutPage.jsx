@@ -91,10 +91,6 @@ const CheckoutPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const submitOrder = () => {
-    console.log('Order details:', formData);
-  };
-
   /*
     dynamically render the component for the current step.
     commonProps object demonstrates passing shared properties to all step components.

@@ -19,7 +19,6 @@ const RoleSwitcher = () => {
 
     // update global state and local storage
     loginAs(newRole);
-    console.log(`Role changed to: ${newRole.toUpperCase()}.`);
 
     if (newRole === 'client') {
       navigate('/', { replace: true });
