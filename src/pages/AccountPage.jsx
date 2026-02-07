@@ -6,11 +6,12 @@ import '../styles/pages/_accountPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { validateEmail } from '../utils/validationUtils';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
+    .required('Email is required')
+    .test('valid-email', 'Please enter a valid email address (e.g. user@domain.com)', validateEmail),
   password: Yup.string()
     .required('Password is required'),
 });
@@ -25,8 +26,8 @@ const RegisterSchema = Yup.object().shape({
     .matches(/^[a-zA-Z\s-]+$/, 'Surname can only contain letters')
     .required('Surname is required'),
   email: Yup.string()
-    .email('Invalid email address')
-    .required('Email is required'),
+    .required('Email is required')
+    .test('valid-email', 'Please enter a valid email address (e.g. user@domain.com)', validateEmail),
   password: Yup.string()
     .min(6, 'Password must be at least 6 characters')
     .required('Password is required'),

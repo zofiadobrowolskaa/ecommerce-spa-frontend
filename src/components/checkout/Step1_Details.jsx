@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { validateEmail } from '../../utils/validationUtils';
 
 const Step1Schema = Yup.object().shape({
   name: Yup.string()
@@ -14,8 +15,8 @@ const Step1Schema = Yup.object().shape({
     .required('Surname is required'),
 
   email: Yup.string()
-    .email('Invalid email address format')
-    .required('Email is required'),
+    .required('Email is required')
+    .test('valid-email', 'Please enter a valid email address (e.g. user@domain.com)', validateEmail),
 
   phone: Yup.string()
     .matches(/^\+?[0-9\s-]{9,15}$/, 'Phone number must contain only digits (9-15 chars)')
