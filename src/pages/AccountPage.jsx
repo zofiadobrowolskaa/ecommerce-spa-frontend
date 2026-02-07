@@ -95,6 +95,7 @@ const AccountPage = () => {
         <div className="auth-content">
           {activeTab === 'login' ? (
             <Formik
+              key="login"
               initialValues={{ email: '', password: '' }}
               validationSchema={LoginSchema}
               onSubmit={handleLoginSubmit}
@@ -134,8 +135,9 @@ const AccountPage = () => {
               )}
             </Formik>
           ) : (
-            // --- REGISTRATION FORM ---
+         
             <Formik
+              key="register"
               initialValues={{ name: '', surname: '', email: '', password: '', confirmPassword: '' }}
               validationSchema={RegisterSchema}
               onSubmit={handleRegisterSubmit}
